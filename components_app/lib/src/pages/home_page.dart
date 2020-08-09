@@ -14,28 +14,38 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _createList() {
-    print("HomePage_TAG: _createList: ");
-    print(menuProvider.options);
-
-    return ListView(
-      children: _createListItems(),
+    return FutureBuilder(
+      future: menuProvider.loadData(),
+      initialData: [],
+      builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
+        return ListView(
+          children: _createListItems(snapshot.data),
+        );
+      },
     );
   }
 
-  List<Widget> _createListItems() {
+  List<Widget> _createListItems(List<dynamic> data) {
     print("HomePage_TAG: _createListItems: ");
-    return [
-      ListTile(
-        title: Text("Hello World"),
-      ),
-      Divider(),
-      ListTile(
-        title: Text("Hello World"),
-      ),
-      Divider(),
-      ListTile(
-        title: Text("Hello World"),
-      ),
-    ];
+    final List<Widget> options = [];
+
+    data.forEach((route) {
+      final widgetTemp = ListTile(
+        title: Text(route["name"]),
+        leading: Icon(
+          Icons.account_circle,
+          color: Colors.blue,
+        ),
+        trailing: Icon(
+          Icons.keyboard_arrow_right,
+          color: Colors.blue,
+        ),
+        onTap: () {},
+      );
+
+      options..add(widgetTemp)..add(Divider());
+    });
+
+    return options;
   }
 }
