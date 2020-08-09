@@ -4,7 +4,7 @@
     {
       "route": "alert",
       "icon": "add_alert",
-      "name": "Alertas"
+      "name": "Alerts"
     },
     {
       "route": "avatar",
@@ -14,7 +14,7 @@
     {
       "route": "card",
       "icon": "folder_open",
-      "name": "Cards - Tarjetas"
+      "name": "Cards"
     }
   ]
 }
