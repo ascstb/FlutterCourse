@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
 import 'package:counter_app/src/pages/counter/counter_page.dart';
+import 'package:flutter/material.dart';
 
 class CounterPageState extends State<CounterPage> {
   final TextStyle txtStyle = TextStyle(fontSize: 25);
@@ -33,22 +32,32 @@ class CounterPageState extends State<CounterPage> {
           )
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        tooltip: "Click",
-        child: Icon(Icons.add),
-        onPressed: onButtonClicked,
-      ),
+      floatingActionButton: _createButtons(),
 //      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 
-  void onButtonClicked() {
+  void _onAddButtonClicked() {
     counter++;
     print("onButtonClicked: $counter");
-    refreshUI();
+    _refreshUI();
   }
 
-  void refreshUI() {
+  void _refreshUI() {
     setState(() {});
   }
+
+  Widget _createButtons() => Row(
+        children: [
+          SizedBox(
+            width: 30,
+          ),
+          FloatingActionButton(
+              child: Icon(Icons.exposure_zero), onPressed: null),
+          Expanded(child: SizedBox()),
+          FloatingActionButton(child: Icon(Icons.remove), onPressed: null),
+          Expanded(child: SizedBox()),
+          FloatingActionButton(child: Icon(Icons.add), onPressed: _onAddButtonClicked),
+        ],
+      );
 }
