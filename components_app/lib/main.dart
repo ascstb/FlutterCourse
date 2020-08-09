@@ -6,6 +6,7 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print("MyApp_TAG: build: ");
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Components App',
