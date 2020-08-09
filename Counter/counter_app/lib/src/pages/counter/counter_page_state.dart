@@ -39,7 +39,19 @@ class CounterPageState extends State<CounterPage> {
 
   void _onAddButtonClicked() {
     counter++;
-    print("onButtonClicked: $counter");
+    print("_onAddButtonClicked: $counter");
+    _refreshUI();
+  }
+
+  void _onRestButtonClicked() {
+    counter--;
+    print("_onRestButtonClicked: $counter");
+    _refreshUI();
+  }
+
+  void _onResetButtonClicked() {
+    counter = 0;
+    print("_onResetButtonClicked: $counter");
     _refreshUI();
   }
 
@@ -53,11 +65,14 @@ class CounterPageState extends State<CounterPage> {
             width: 30,
           ),
           FloatingActionButton(
-              child: Icon(Icons.exposure_zero), onPressed: null),
+              child: Icon(Icons.exposure_zero),
+              onPressed: _onResetButtonClicked),
           Expanded(child: SizedBox()),
-          FloatingActionButton(child: Icon(Icons.remove), onPressed: null),
+          FloatingActionButton(
+              child: Icon(Icons.remove), onPressed: _onRestButtonClicked),
           Expanded(child: SizedBox()),
-          FloatingActionButton(child: Icon(Icons.add), onPressed: _onAddButtonClicked),
+          FloatingActionButton(
+              child: Icon(Icons.add), onPressed: _onAddButtonClicked),
         ],
       );
 }
