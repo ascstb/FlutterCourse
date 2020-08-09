@@ -1,3 +1,5 @@
+import 'package:components_app/src/pages/alert_page.dart';
+import 'package:components_app/src/pages/avatar_page.dart';
 import 'package:components_app/src/providers/menu_provider.dart';
 import 'package:components_app/src/utils/icon_string_util.dart';
 import 'package:flutter/material.dart';
@@ -20,24 +22,35 @@ class HomePage extends StatelessWidget {
       initialData: [],
       builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
         return ListView(
-          children: _createListItems(snapshot.data),
+          children: _createListItems(context, snapshot.data),
         );
       },
     );
   }
 
-  List<Widget> _createListItems(List<dynamic> data) {
+  List<Widget> _createListItems(BuildContext context, List<dynamic> data) {
     print("HomePage_TAG: _createListItems: ");
     final List<Widget> options = [];
 
-    data.forEach((route) {
+    data.forEach((option) {
       final widgetTemp = ListTile(
-        title: Text(route["name"]),
-        leading: getIcon(route["icon"]),
+        title: Text(option["name"]),
+        leading: getIcon(option["icon"]),
         trailing: getIcon("keyboard-arrow-right"),
-        onTap: () {},
-      );
+        onTap: () {
+          final route = MaterialPageRoute(builder: (context) {
+            switch (option["route"]) {
+              case "alert":
+                return AlertPage();
+              case "avatar":
+                return AvatarPage();
+            }
 
+            return AlertPage();
+          });
+          Navigator.push(context, route);
+        },
+      );
       options..add(widgetTemp)..add(Divider());
     });
 
