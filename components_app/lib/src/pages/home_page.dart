@@ -1,5 +1,3 @@
-import 'package:components_app/src/pages/alert_page.dart';
-import 'package:components_app/src/pages/avatar_page.dart';
 import 'package:components_app/src/providers/menu_provider.dart';
 import 'package:components_app/src/utils/icon_string_util.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +36,7 @@ class HomePage extends StatelessWidget {
         leading: getIcon(option["icon"]),
         trailing: getIcon("keyboard-arrow-right"),
         onTap: () {
-          final route = MaterialPageRoute(builder: (context) {
+          /*final route = MaterialPageRoute(builder: (context) {
             switch (option["route"]) {
               case "alert":
                 return AlertPage();
@@ -48,7 +46,8 @@ class HomePage extends StatelessWidget {
 
             return AlertPage();
           });
-          Navigator.push(context, route);
+          Navigator.push(context, route);*/
+          Navigator.pushNamed(context, option["route"]);
         },
       );
       options..add(widgetTemp)..add(Divider());
