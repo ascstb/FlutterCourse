@@ -10,6 +10,10 @@ class CardPage extends StatelessWidget {
       body: ListView(
         children: [
           _cardType1(),
+          SizedBox(
+            width: 30.0,
+          ),
+          _cardType2(),
         ],
         padding: EdgeInsets.all(10.0),
       ),
@@ -42,6 +46,29 @@ class CardPage extends StatelessWidget {
                 onPressed: () {},
               ),
             ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _cardType2() {
+    print("CardPage_TAG: _cardType2: ");
+    return Card(
+      child: Column(
+        children: [
+          FadeInImage(
+            placeholder: AssetImage("assets/jar_loading.gif"),
+            image: NetworkImage("https://www.yourtrainingedge.com/wp-content/uploads/2019/05/background-calm-clouds-747964.jpg"),
+            fadeInDuration: Duration(
+              milliseconds: 200
+            ),
+            height: 250.0,
+            fit: BoxFit.cover,
+          ),
+          Container(
+            padding: EdgeInsets.all(10.0),
+            child: Text("Image about something"),
           )
         ],
       ),
