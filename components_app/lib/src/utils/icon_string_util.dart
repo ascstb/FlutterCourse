@@ -5,8 +5,13 @@ final _icons = <String, IconData>{
   "accessibility": Icons.accessibility,
   "folder_open": Icons.folder_open,
   "keyboard-arrow-right": Icons.keyboard_arrow_right,
+  "donut_large": Icons.donut_large,
+  "input": Icons.input,
 };
 
 Icon getIcon(String iconName) {
-  return Icon(_icons[iconName], color: Colors.blue,);
+  return Icon(
+    _icons[iconName],
+    color: Colors.blue,
+  );
 }
