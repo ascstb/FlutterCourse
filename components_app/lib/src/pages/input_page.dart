@@ -9,6 +9,8 @@ class _InputPageState extends State<InputPage> {
   String _name = "";
   String _email = "";
   String _password = "";
+  String _date = "";
+  TextEditingController _inputFieldDateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,8 @@ class _InputPageState extends State<InputPage> {
           _createEmail(),
           Divider(),
           _createPassword(),
+          Divider(),
+          _createDate(context),
           Divider(),
           _createPerson(),
         ],
@@ -72,9 +76,10 @@ class _InputPageState extends State<InputPage> {
           suffixIcon: Icon(Icons.alternate_email),
           icon: Icon(Icons.email)),
       keyboardType: TextInputType.emailAddress,
-      onChanged: (value) => setState(() {
-        _email = value;
-      }),
+      onChanged: (value) =>
+          setState(() {
+            _email = value;
+          }),
     );
   }
 
@@ -89,9 +94,46 @@ class _InputPageState extends State<InputPage> {
           suffixIcon: Icon(Icons.lock_open),
           icon: Icon(Icons.lock)),
       obscureText: true,
-      onChanged: (value) => setState(() {
-        _password = value;
-      }),
+      onChanged: (value) =>
+          setState(() {
+            _password = value;
+          }),
     );
+  }
+
+  Widget _createDate(BuildContext context) {
+    print("_InputPageState_TAG: _createDate: ");
+    return TextField(
+      controller: _inputFieldDateController,
+      enableInteractiveSelection: false,
+      decoration: InputDecoration(
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+          hintText: "Your date of birth",
+          labelText: "Date of birth",
+          helperText: "Date of birth",
+          suffixIcon: Icon(Icons.perm_contact_calendar),
+          icon: Icon(Icons.calendar_today)),
+      onTap: () {
+        FocusScope.of(context).requestFocus(new FocusNode());
+        _selectDate(context);
+      },
+    );
+  }
+
+  _selectDate(BuildContext context) async {
+    print("_InputPageState_TAG: _selectDate: ");
+    DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2018),
+        lastDate: DateTime(2025)
+    );
+
+    if(picked != null) {
+      setState(() {
+        _date = picked.toString().substring(0, 10);
+        _inputFieldDateController.text = _date;
+      });
+    }
   }
 }
