@@ -76,10 +76,9 @@ class _InputPageState extends State<InputPage> {
           suffixIcon: Icon(Icons.alternate_email),
           icon: Icon(Icons.email)),
       keyboardType: TextInputType.emailAddress,
-      onChanged: (value) =>
-          setState(() {
-            _email = value;
-          }),
+      onChanged: (value) => setState(() {
+        _email = value;
+      }),
     );
   }
 
@@ -94,10 +93,9 @@ class _InputPageState extends State<InputPage> {
           suffixIcon: Icon(Icons.lock_open),
           icon: Icon(Icons.lock)),
       obscureText: true,
-      onChanged: (value) =>
-          setState(() {
-            _password = value;
-          }),
+      onChanged: (value) => setState(() {
+        _password = value;
+      }),
     );
   }
 
@@ -126,10 +124,10 @@ class _InputPageState extends State<InputPage> {
         context: context,
         initialDate: DateTime.now(),
         firstDate: DateTime(2018),
-        lastDate: DateTime(2025)
-    );
+        lastDate: DateTime(2025),
+        locale: Locale("en", "US"));
 
-    if(picked != null) {
+    if (picked != null) {
       setState(() {
         _date = picked.toString().substring(0, 10);
         _inputFieldDateController.text = _date;
