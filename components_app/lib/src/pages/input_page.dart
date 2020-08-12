@@ -7,6 +7,8 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   String _name = "";
+  String _email = "";
+  String _password = "";
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +19,10 @@ class _InputPageState extends State<InputPage> {
       body: ListView(
         children: [
           _createInputs(),
+          Divider(),
+          _createEmail(),
+          Divider(),
+          _createPassword(),
           Divider(),
           _createPerson(),
         ],
@@ -51,6 +57,41 @@ class _InputPageState extends State<InputPage> {
     print("_InputPageState_TAG: _createPerson: ");
     return ListTile(
       title: Text("First name is: $_name"),
+      subtitle: Text("Email: $_email"),
+    );
+  }
+
+  Widget _createEmail() {
+    print("_InputPageState_TAG: _createEmail: ");
+    return TextField(
+      decoration: InputDecoration(
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+          hintText: "Your email",
+          labelText: "Email Address",
+          helperText: "Just the email address",
+          suffixIcon: Icon(Icons.alternate_email),
+          icon: Icon(Icons.email)),
+      keyboardType: TextInputType.emailAddress,
+      onChanged: (value) => setState(() {
+        _email = value;
+      }),
+    );
+  }
+
+  Widget _createPassword() {
+    print("_InputPageState_TAG: _createPassword: ");
+    return TextField(
+      decoration: InputDecoration(
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+          hintText: "Your password",
+          labelText: "Password",
+          helperText: "Just the password",
+          suffixIcon: Icon(Icons.lock_open),
+          icon: Icon(Icons.lock)),
+      obscureText: true,
+      onChanged: (value) => setState(() {
+        _password = value;
+      }),
     );
   }
 }
