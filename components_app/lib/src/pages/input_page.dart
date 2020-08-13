@@ -8,8 +8,11 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   String _name = "";
   String _email = "";
-  String _password = "";
   String _date = "";
+
+  String _selectedOption = "Fly";
+  List _powers = ["Fly", "X-ray", "Super Breath", "Super Strength"];
+
   TextEditingController _inputFieldDateController = TextEditingController();
 
   @override
@@ -27,6 +30,8 @@ class _InputPageState extends State<InputPage> {
           _createPassword(),
           Divider(),
           _createDate(context),
+          Divider(),
+          _createDropDown(),
           Divider(),
           _createPerson(),
         ],
@@ -62,6 +67,7 @@ class _InputPageState extends State<InputPage> {
     return ListTile(
       title: Text("First name is: $_name"),
       subtitle: Text("Email: $_email"),
+      trailing: Text(_selectedOption),
     );
   }
 
@@ -94,7 +100,7 @@ class _InputPageState extends State<InputPage> {
           icon: Icon(Icons.lock)),
       obscureText: true,
       onChanged: (value) => setState(() {
-        _password = value;
+
       }),
     );
   }
@@ -133,5 +139,38 @@ class _InputPageState extends State<InputPage> {
         _inputFieldDateController.text = _date;
       });
     }
+  }
+
+  List<DropdownMenuItem<String>> _getDropDownItems() {
+    List<DropdownMenuItem<String>> list = List();
+    _powers.forEach((power) {
+      list.add(DropdownMenuItem(
+        child: Text(power),
+        value: power,
+      ));
+    });
+
+    return list;
+  }
+
+  Widget _createDropDown() {
+    print("_InputPageState_TAG: _createDropDown: ");
+    return Row(
+      children: [
+        Icon(Icons.select_all),
+        SizedBox(width: 30.0),
+        Expanded(
+          child: DropdownButton(
+            value: _selectedOption,
+            items: _getDropDownItems(),
+            onChanged: (option) {
+              setState(() {
+                _selectedOption = option;
+              });
+            },
+          ),
+        )
+      ],
+    );
   }
 }
