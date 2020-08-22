@@ -152,7 +152,7 @@ class LoginPage extends StatelessWidget {
   _createLoginButton(LoginBloc bloc) {
     return StreamBuilder(
       stream: bloc.validFormStream,
-      builder: (BuildContext context, AsyncSnapshot snapshopt) {
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
         return RaisedButton(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
@@ -164,9 +164,13 @@ class LoginPage extends StatelessWidget {
           elevation: 0.0,
           color: Colors.deepPurple,
           textColor: Colors.white,
-          onPressed: snapshopt.hasData ? () {} : null,
+          onPressed: snapshot.hasData ? _login(context, bloc) : null,
         );
       },
     );
+  }
+
+  _login(BuildContext context, LoginBloc bloc) {
+    Navigator.pushReplacementNamed(context, "home");
   }
 }
