@@ -7,6 +7,7 @@ final _icons = <String, IconData>{
   "keyboard-arrow-right": Icons.keyboard_arrow_right,
   "donut_large": Icons.donut_large,
   "input": Icons.input,
+  "list": Icons.list,
 };
 
 Icon getIcon(String iconName) {

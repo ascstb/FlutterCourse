@@ -25,6 +25,11 @@
       "route": "inputs",
       "icon": "input",
       "name": "Inputs"
+    },
+    {
+      "route": "list",
+      "icon": "list",
+      "name": "Lists"
     }
   ]
 }
