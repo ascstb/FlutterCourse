@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:form_validation/src/blocs/login_block.dart';
+export 'package:form_validation/src/blocs/login_block.dart';
 
 class Provider extends InheritedWidget {
   final loginBloc = LoginBloc();

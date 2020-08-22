@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:form_validation/src/blocs/provider.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -61,6 +62,7 @@ class LoginPage extends StatelessWidget {
   }
 
   Widget _loginForm(BuildContext context) {
+    final bloc = Provider.of(context);
     final size = MediaQuery.of(context).size;
 
     return SingleChildScrollView(
@@ -89,9 +91,9 @@ class LoginPage extends StatelessWidget {
               children: [
                 Text("Login", style: TextStyle(fontSize: 20.0)),
                 SizedBox(height: 60.0),
-                _createEmail(),
+                _createEmail(bloc),
                 SizedBox(height: 30.0),
-                _createPassword(),
+                _createPassword(bloc),
                 SizedBox(height: 30.0),
                 _createLoginButton()
               ],
@@ -104,30 +106,44 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  _createEmail() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
-      child: TextField(
-        keyboardType: TextInputType.emailAddress,
-        decoration: InputDecoration(
-          icon: Icon(Icons.alternate_email, color: Colors.deepPurple),
-          hintText: "r2@r2devpros.com",
-          labelText: "Email Address",
-        ),
-      ),
+  _createEmail(LoginBloc bloc) {
+    return StreamBuilder(
+      stream: bloc.emailStream,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        return Container(
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          child: TextField(
+            keyboardType: TextInputType.emailAddress,
+            decoration: InputDecoration(
+              icon: Icon(Icons.alternate_email, color: Colors.deepPurple),
+              hintText: "r2@r2devpros.com",
+              labelText: "Email Address",
+              counterText: snapshot.data,
+            ),
+            onChanged: bloc.changeEmail,
+          ),
+        );
+      },
     );
   }
 
-  _createPassword() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
-      child: TextField(
-        keyboardType: TextInputType.emailAddress,
-        decoration: InputDecoration(
-          icon: Icon(Icons.lock_outline, color: Colors.deepPurple),
-          labelText: "Password",
-        ),
-      ),
+  _createPassword(LoginBloc bloc) {
+    return StreamBuilder(
+      stream: bloc.passwordStream,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        return Container(
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          child: TextField(
+            obscureText: true,
+            decoration: InputDecoration(
+              icon: Icon(Icons.lock_outline, color: Colors.deepPurple),
+              labelText: "Password",
+              counterText: snapshot.data,
+            ),
+            onChanged: bloc.changePassword,
+          ),
+        );
+      },
     );
   }
 
